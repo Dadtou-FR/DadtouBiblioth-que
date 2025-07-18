@@ -1,0 +1,25 @@
+bibliotheque/
+│
+├── index.php                # Page d'accueil
+├── login.php                # Connexion
+├── register.php             # Inscription
+├── logout.php               # Déconnexion
+├── profil.php               # Espace utilisateur
+│
+├── admin/
+│   ├── ajouter_livre.php    # Formulaire d’ajout
+│   ├── modifier_livre.php   # Modifier un livre
+│   ├── supprimer_livre.php  # Supprimer
+│   └── reservations.php     # Gérer les réservations
+│
+├── livres.php               # Liste de tous les livres
+├── reserver.php             # Réservation d’un livre
+│
+├── includes/
+│   ├── db.php               # Connexion BDD
+│   └── auth.php             # Authentification
+│
+├── css/
+│   └── style.css            # Feuille de style
+│
+└── uploads/                 # Si vous voulez stocker les images de couverture

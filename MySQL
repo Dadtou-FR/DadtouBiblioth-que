@@ -1,0 +1,51 @@
+-- Création de la base de données
+CREATE DATABASE bibliotheque;
+USE bibliotheque;
+
+-- Table des utilisateurs
+CREATE TABLE utilisateurs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    mot_de_passe VARCHAR(255) NOT NULL,
+    role ENUM('utilisateur', 'admin') DEFAULT 'utilisateur',
+    date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Table des livres
+CREATE TABLE livres (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titre VARCHAR(255) NOT NULL,
+    auteur VARCHAR(255) NOT NULL,
+    isbn VARCHAR(20) UNIQUE,
+    genre VARCHAR(100),
+    description TEXT,
+    stock_total INT DEFAULT 1,
+    stock_disponible INT DEFAULT 1,
+    image_couverture VARCHAR(255),
+    date_ajout TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Table des réservations
+CREATE TABLE reservations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    utilisateur_id INT,
+    livre_id INT,
+    date_reservation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    statut ENUM('en_attente', 'validee', 'annulee', 'terminee') DEFAULT 'en_attente',
+    date_validation TIMESTAMP NULL,
+    date_retour_prevue DATE NULL,
+    FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs(id) ON DELETE CASCADE,
+    FOREIGN KEY (livre_id) REFERENCES livres(id) ON DELETE CASCADE
+);
+
+-- Insertion d'un utilisateur admin par défaut
+INSERT INTO utilisateurs (nom, email, mot_de_passe, role) VALUES 
+('Administrateur', 'admin@bibliotheque.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
+
+-- Insertion de quelques livres d'exemple
+INSERT INTO livres (titre, auteur, isbn, genre, description, stock_total, stock_disponible) VALUES 
+('Le Petit Prince', 'Antoine de Saint-Exupéry', '9782070408504', 'Littérature', 'Un conte philosophique et poétique', 3, 3),
+('1984', 'George Orwell', '9782070368228', 'Science-fiction', 'Roman dystopique emblématique', 2, 2),
+('L\'Étranger', 'Albert Camus', '9782070360024', 'Littérature', 'Roman existentialiste', 2, 2),
+('Harry Potter à l\'école des sorciers', 'J.K. Rowling', '9782070518425', 'Fantasy', 'Premier tome de la saga Harry Potter', 4, 4);
