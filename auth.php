@@ -1,6 +1,24 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once 'db.php';
+
+// Vérifie si l'utilisateur est connecté
+function is_logged_in() {
+    return isset($_SESSION['user_id']);
+}
+
+// Vérifie si l'utilisateur est un administrateur
+function is_admin() {
+    return isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
+}
+
+// Redirection simple
+function redirect($url) {
+    header("Location: $url");
+    exit;
+}
 
 // Fonction pour vérifier l'authentification
 function require_login() {
@@ -16,7 +34,19 @@ function require_admin() {
         redirect('index.php');
     }
 }
-
+// auth.php
+function get_user_info() {
+    global $pdo; // Make sure $pdo is your database connection
+    
+    // Check if user is logged in (you should have this from your auth system)
+    if (!isset($_SESSION['user_id'])) {
+        return null;
+    }
+    
+    $stmt = $pdo->prepare("SELECT * FROM utilisateurs WHERE id = ?");
+    $stmt->execute([$_SESSION['user_id']]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
 // Fonction de connexion
 function login_user($email, $password) {
     global $pdo;
@@ -58,4 +88,3 @@ function logout_user() {
     session_destroy();
     redirect('login.php');
 }
-?>

@@ -1,5 +1,12 @@
 <?php
-require_once 'includes/auth.php';
+require_once 'auth.php';
+// Fonction de nettoyage des entrées utilisateur
+function sanitize_input($data) {
+    $data = trim($data); // Supprime les espaces en début et fin
+    $data = stripslashes($data); // Supprime les antislashs
+    $data = htmlspecialchars($data, ENT_QUOTES, 'UTF-8'); // Protège contre les XSS
+    return $data;
+}
 require_login();
 
 $user = get_user_info();

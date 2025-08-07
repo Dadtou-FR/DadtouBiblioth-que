@@ -41,7 +41,7 @@ CREATE TABLE reservations (
 
 -- Insertion d'un utilisateur admin par défaut
 INSERT INTO utilisateurs (nom, email, mot_de_passe, role) VALUES 
-('Administrateur', 'admin@bibliotheque.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
+('Administrateur', 'ralphonsehaja@gmail.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
 
 -- Insertion de quelques livres d'exemple
 INSERT INTO livres (titre, auteur, isbn, genre, description, stock_total, stock_disponible) VALUES 

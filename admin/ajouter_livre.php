@@ -1,5 +1,6 @@
 <?php
-require_once '../includes/auth.php';
+require('../db.php');
+require('../auth.php');
 require_admin();
 
 $error = '';

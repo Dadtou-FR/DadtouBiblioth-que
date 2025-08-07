@@ -1,0 +1,26 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers de configuration IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Fichiers de dépendances
+/vendor/
+/node_modules/
+
+# Fichiers de configuration sensibles
+# db.php  # Décommentez si vous voulez exclure les identifiants de base de données
+
+# Fichiers temporaires
+*.log
+*.cache
+*.tmp
+
+# Fichiers de sauvegarde
+*~
+*.bak
+*.swp
